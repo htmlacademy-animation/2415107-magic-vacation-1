@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .form__label {
@@ -79,7 +80,7 @@
 }
 
 .form__button {
-  flex-grow: 1;
+  padding: 1.5rem 4.55rem;
 
   @media (orientation: portrait) {
     position: relative;
@@ -145,4 +146,12 @@
       width: calc(100% - 5rem);
     }
   }
+}
+
+.screen.screen--game.active .form__field {
+  transition: width 300ms;
+}
+
+.screen.screen--game:not(.active) .form__field {
+  width: 0;
 }
