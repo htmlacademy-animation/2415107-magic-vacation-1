@@ -19,3 +19,13 @@ $retina-dpi: 144dpi;
 $retina-dppx: 1.5dppx;
 
 $index: 1.38871;
+
+$time-function-normal-acceleration-and-slow-braking: cubic-bezier(.5,0,0,1);
+$time-function-with-flying-out: cubic-bezier(.5,0,.5,1.5);
+
+$standart-duration: 300ms;
+$standart-delay: 100ms;
+
+:export {
+    standart-duration: $standart-duration;
+}
