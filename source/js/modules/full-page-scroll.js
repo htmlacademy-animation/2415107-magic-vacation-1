@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import variables from '../../scss/general/variables.scss';
 
 export default class FullPageScroll {
   constructor() {
@@ -52,14 +53,39 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
-    this.screenElements.forEach((screen) => {
-      screen.classList.add(`screen--hidden`);
-      screen.classList.remove(`active`);
-    });
-    this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
-    setTimeout(() => {
-      this.screenElements[this.activeScreen].classList.add(`active`);
-    }, 100);
+    const activeScreen = document.querySelector('.screen.active');
+    const backgroundLayer = document.querySelector('.background-layer');
+    const delayBetweenScreenChanges = parseFloat(variables['standart-duration']) || 0;
+
+    const toggleActiveClass = () => {
+      this.screenElements.forEach((screen) => {
+        screen.classList.remove(`active`)
+      });
+      setTimeout(() => {
+        this.screenElements[this.activeScreen].classList.add(`active`);
+      }, 100);
+    }
+
+    const toggleScreenHiddenClass = () => {
+      this.screenElements.forEach((screen) => {
+        screen.classList.add(`screen--hidden`);
+      });
+      this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
+    }
+
+    if (activeScreen) {
+      backgroundLayer.classList.remove('background-layer_initial');
+
+      setTimeout(() => {
+        backgroundLayer.classList.add('background-layer_initial');
+
+        toggleActiveClass();
+        toggleScreenHiddenClass();
+      }, delayBetweenScreenChanges);
+    } else {
+      toggleActiveClass();
+      toggleScreenHiddenClass();
+    }
   }
 
   changeActiveMenuItem() {

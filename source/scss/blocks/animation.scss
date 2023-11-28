@@ -28,6 +28,23 @@ body {
       }
     }
   }
+
+  .background-layer {
+    position: absolute;
+    bottom: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: $c-dark;
+    transform-origin: bottom;
+    transform: scale(1, 1);
+    z-index: 1;
+    &.background-layer_initial {
+      transform: scale(1, 0);
+    }
+    &:not(.background-layer_initial) {
+      transition: transform $standart-duration linear;
+    }
+  }
 }
 
 body.page-loaded {
@@ -35,8 +52,8 @@ body.page-loaded {
   .page-header__logo,
   .screen--intro .screen__footer {
     opacity: 1;
-    transition: opacity 300ms cubic-bezier(.5,0,0,1);
-    transition-delay: 200ms;
+    transition: opacity $standart-duration $time-function-normal-acceleration-and-slow-braking;
+    transition-delay: $standart-delay * 2;
   }
 
   .page-header {
@@ -45,21 +62,21 @@ body.page-loaded {
         width: 100%;
         left: 0;
         right: auto;
-        transition: width 300ms;
-        transition-delay: 400ms;
+        transition: width $standart-duration;
+        transition-delay: $standart-delay * 4;
       }
     }
 
     .page-header__logo {
       transform: translateX(0);
-      transition: transform 300ms cubic-bezier(.5,0,0,1);
-      transition-delay: 100ms;
+      transition: transform $standart-duration $time-function-normal-acceleration-and-slow-braking;
+      transition-delay: $standart-delay;
     }
     
     .social-block__toggler::before {
       transform: translate(-50%, -50%) scale(1, 1);
-      transition: transform 300ms cubic-bezier(.5,0,.5,1.5);
-      transition-delay: 300ms;
+      transition: transform $standart-duration $time-function-with-flying-out;
+      transition-delay: $standart-delay * 3;
     }
   }
 
@@ -67,7 +84,7 @@ body.page-loaded {
     &.screen--intro {
       .screen__footer {
         transform: translateY(0);
-        transition: transform 300ms cubic-bezier(.5,0,0,1);
+        transition: transform $standart-duration $time-function-normal-acceleration-and-slow-braking;
       }
     }
   }
