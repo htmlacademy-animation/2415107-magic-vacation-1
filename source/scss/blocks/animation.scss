@@ -87,5 +87,146 @@ body.page-loaded {
         transition: transform $standart-duration $time-function-normal-acceleration-and-slow-braking;
       }
     }
+
+    &.screen--rules {
+      $time-function-with-flying-out-time-at-the-top: $standart-duration * 2 / 3;
+
+      .rules__item {
+        p {
+          opacity: 0;
+          transform: translateX(2rem);
+          animation-name: showBulletLabel;
+          animation-fill-mode: forwards;
+          animation-duration: $standart-duration;
+        }
+
+        &::before {
+          content: '';
+          transform: scale(0);
+          animation-name: showBullet, showBulletText;
+          animation-timing-function: $time-function-with-flying-out, ease;
+          animation-fill-mode: forwards, forwards;
+          animation-duration: $standart-duration, $standart-duration;
+        }
+
+        &:nth-child(1) {
+          p {
+            animation-delay: $time-function-with-flying-out-time-at-the-top;
+          }
+
+          &::before {
+            animation-delay: 0;
+          }
+        }
+
+        &:nth-child(2) {
+          p {
+            animation-delay: $time-function-with-flying-out-time-at-the-top * 2;
+          }
+
+          &::before {
+            animation-delay: $time-function-with-flying-out-time-at-the-top;
+          }
+        }
+
+        &:nth-child(3) {
+          p {
+            animation-delay: $time-function-with-flying-out-time-at-the-top * 3;
+          }
+
+          &::before {
+            animation-delay: $time-function-with-flying-out-time-at-the-top * 2;
+          }
+        }
+
+        &:nth-child(4) {
+          p {
+            animation-delay: $time-function-with-flying-out-time-at-the-top * 4;
+          }
+
+          &::before {
+            animation-delay: $time-function-with-flying-out-time-at-the-top * 3;
+          }
+        }
+      }
+
+      .rules__link.btn {
+        opacity: 0;
+        color: transparent;
+        animation-name: showButton, showButtonText;
+        animation-duration: 0ms, 0ms;
+        animation-fill-mode: forwards, forwards;
+        animation-delay: $time-function-with-flying-out-time-at-the-top + $standart-duration * 3, $time-function-with-flying-out-time-at-the-top + $standart-duration * 4;
+
+        &::before {
+          top: 50%;
+          left: auto;
+          right: 0;
+          transform: translate(0, -50%);
+          width: 33%;
+          animation-name: transformButton;
+          animation-duration: $standart-duration;
+          animation-fill-mode: forwards;
+          animation-delay: $time-function-with-flying-out-time-at-the-top + $standart-duration * 3;
+        }
+      }
+    }
+  }
+  
+}
+
+@keyframes showBullet {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes showBulletText {
+  from, 33% {
+    content: '';
+  }
+  to {
+    content: counter(li);
+  }
+}
+
+@keyframes showBulletLabel {
+  from {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes showButton {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes transformButton {
+  from {
+    width: 33%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes showButtonText {
+  from {
+    color: transparent;
+  }
+  to {
+    color: #5f458c;
   }
 }
